@@ -25,7 +25,9 @@ export default function HomePage() {
   React.useEffect(() => {
     const getData = async () => {
       const data: Employee[] = await employeeService.findAll();
-      setEmployees(data);
+      // if (data.length > 0) {
+      //   setEmployees(data);
+      // }
       setLoading(false);
     };
 
@@ -41,7 +43,7 @@ export default function HomePage() {
         sx={{ marginBottom: "1rem" }}
       >
         <Typography variant="h5">Cadastro de Funcionários</Typography>
-        {employees.length > 0 && (
+        {employees && employees.length > 0 && (
           <Typography variant="body1">
             Número de Registros: {employees.length}
           </Typography>
@@ -60,7 +62,7 @@ export default function HomePage() {
 
       {loading ? (
         <CircularProgress />
-      ) : employees.length === 0 ? (
+      ) : employees && employees.length === 0 ? (
         <Typography variant="body1">Nenhum registro encontrado.</Typography>
       ) : (
         <TableContainer component={Paper}>
